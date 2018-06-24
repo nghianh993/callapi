@@ -6,19 +6,12 @@ import callAPI from './../utils/apiCaller';
 import { actFetchProductsRequest } from './../actions/index';
 
 class ProductsContainer extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            products : []
-        }
-    }
-
     componentDidMount() {
         this.props.fetchAllProducts();
     }
 
     render() {
-        let { products } = this.props;
+        var { products } = this.props;
         return (
             <ProductList>
                 {this.showProducts(products)}
@@ -29,7 +22,7 @@ class ProductsContainer extends Component {
     onDeleteProduct = (id) => {
         if(confirm('Bạn có chắc muốn xóa sản phẩm này không?')){ //eslint-disable-line
             callAPI(`products/${id}`, 'DELETE', null).then(resp => {
-                var { products } = this.state;
+                var { products } = this.props;
                 if(resp.status === 200){
                     var index = this.findIndex(products, id);
                     if(index !== -1) {
@@ -37,7 +30,7 @@ class ProductsContainer extends Component {
                         this.setState({
                             products : products
                         });
-                        alert('Bạn đã xóa sản phẩm thành công!');
+                        //alert('Bạn đã xóa sản phẩm thành công!');
                     }
                 }
             });
@@ -54,9 +47,8 @@ class ProductsContainer extends Component {
     }
 
     showProducts = (products) => {
-        var result = null;
         if(products.length > 0){
-            result = products.map((product, index) => {
+            let result = products.map((product, index) => {
                 return (
                     <ProductItem 
                         key={index} 
@@ -66,8 +58,9 @@ class ProductsContainer extends Component {
                     />
                 );
             });
+            return result;
         }
-        return result;
+        return <tr><td colSpan='6'>Chưa có dữ liệu</td></tr>;
     }
 }
 
