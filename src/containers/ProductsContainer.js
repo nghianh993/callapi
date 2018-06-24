@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ProductList from './../components/ProductList/ProductList';
 import ProductItem from './../components/ProductItem/ProductItem';
 import callAPI from './../utils/apiCaller';
+import { actFetchProductsRequest } from './../actions/index';
 
 class ProductsContainer extends Component {
     constructor(props){
@@ -12,16 +13,12 @@ class ProductsContainer extends Component {
         }
     }
 
-    componentWillMount() {
-        callAPI('products', 'GET', null).then(resp => {
-            this.setState ({
-                products : resp.data
-            });
-        });
+    componentDidMount() {
+        this.props.fetchAllProducts();
     }
 
     render() {
-        var { products } = this.state;
+        let { products } = this.props;
         return (
             <ProductList>
                 {this.showProducts(products)}
@@ -80,4 +77,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(ProductsContainer);
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchAllProducts : () => {
+            dispatch(actFetchProductsRequest());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
