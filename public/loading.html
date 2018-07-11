@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Trang chủ</title>
+	<style>
+		html{
+			font-size:62.5%
+		}
+		.shell-loader{
+			width:800px;
+			height:1000px;
+			display:-webkit-box;
+			display:-ms-flexbox;
+			display:flex;
+			opacity:0;
+			-webkit-box-pack:center;
+			-ms-flex-pack:center;
+			justify-content:center;
+			-webkit-box-align:center;
+			-ms-flex-align:center;
+			align-items:center;
+			padding-top:5rem;
+			box-sizing:border-box;
+			-webkit-animation:shell-display .1s linear;
+			animation:shell-display .1s linear;
+			-webkit-animation-delay:.3s;
+			animation-delay:.3s;
+			-webkit-animation-fill-mode:forwards;
+			animation-fill-mode:forwards;
+			overflow:hidden;
+			background-color: #00000045;
+		}
+		.shell-loader_spinner{
+			display:inline-block;
+			width:2.2rem;
+			height:2.2rem;
+			margin:0 auto;
+			padding:0;
+			border-top:2px solid rgba(0,0,0,.15);
+			border-right:2px solid rgba(0,0,0,.15);
+			border-bottom:2px solid rgba(0,0,0,.15);
+			border-left:2px solid #19171c;
+			-webkit-animation:shell-loading-spinner .5s infinite linear;
+			animation:shell-loading-spinner .5s infinite linear;
+			border-radius:50%;
+			box-sizing:border-box
+		}
+
+		@-webkit-keyframes shell-loading-spinner{
+			100%{
+				-webkit-transform:rotate(360deg);
+				transform:rotate(360deg)
+			}
+		}
+		@keyframes shell-loading-spinner{
+			100%{
+				-webkit-transform:rotate(360deg);
+				transform:rotate(360deg)
+			}
+		}
+		@-webkit-keyframes shell-display{
+			0%{
+				opacity:0
+			}
+			100%{
+				opacity:1
+			}
+		}
+		@keyframes shell-display{
+			0%{
+				opacity:0
+			}
+			100%{
+				opacity:1
+			}
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="shell-loader" data-a-target="shell-loader">
+		<div class="shell-loader_spinner">
+		</div>
+	</div>	
+</body>
+
+</html>
